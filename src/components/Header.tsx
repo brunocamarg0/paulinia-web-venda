@@ -6,20 +6,40 @@ import { Button } from '@/components/ui/button';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false); // Fecha o menu mobile
+    }
+  };
+
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-blue-600">SitesPaulínia</h1>
+            <h1 className="text-2xl font-bold text-blue-600 cursor-pointer" onClick={() => scrollToSection('inicio')}>
+              SitesPaulínia
+            </h1>
           </div>
           
           <nav className="hidden md:flex space-x-8">
-            <a href="#inicio" className="text-gray-700 hover:text-blue-600 transition-colors">Início</a>
-            <a href="#servicos" className="text-gray-700 hover:text-blue-600 transition-colors">Serviços</a>
-            <a href="#portfolio" className="text-gray-700 hover:text-blue-600 transition-colors">Portfólio</a>
-            <a href="#precos" className="text-gray-700 hover:text-blue-600 transition-colors">Preços</a>
-            <a href="#contato" className="text-gray-700 hover:text-blue-600 transition-colors">Contato</a>
+            <button onClick={() => scrollToSection('inicio')} className="text-gray-700 hover:text-blue-600 transition-colors">
+              Início
+            </button>
+            <button onClick={() => scrollToSection('servicos')} className="text-gray-700 hover:text-blue-600 transition-colors">
+              Serviços
+            </button>
+            <button onClick={() => scrollToSection('portfolio')} className="text-gray-700 hover:text-blue-600 transition-colors">
+              Portfólio
+            </button>
+            <button onClick={() => scrollToSection('precos')} className="text-gray-700 hover:text-blue-600 transition-colors">
+              Preços
+            </button>
+            <button onClick={() => scrollToSection('contato')} className="text-gray-700 hover:text-blue-600 transition-colors">
+              Contato
+            </button>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
@@ -27,7 +47,7 @@ const Header = () => {
               <Phone className="w-4 h-4 mr-1" />
               <span>(19) 9999-9999</span>
             </div>
-            <Button className="bg-green-600 hover:bg-green-700">
+            <Button onClick={() => scrollToSection('contato')} className="bg-green-600 hover:bg-green-700">
               Solicitar Orçamento
             </Button>
           </div>
@@ -43,13 +63,23 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden pb-4">
             <nav className="flex flex-col space-y-2">
-              <a href="#inicio" className="text-gray-700 hover:text-blue-600 py-2">Início</a>
-              <a href="#servicos" className="text-gray-700 hover:text-blue-600 py-2">Serviços</a>
-              <a href="#portfolio" className="text-gray-700 hover:text-blue-600 py-2">Portfólio</a>
-              <a href="#precos" className="text-gray-700 hover:text-blue-600 py-2">Preços</a>
-              <a href="#contato" className="text-gray-700 hover:text-blue-600 py-2">Contato</a>
+              <button onClick={() => scrollToSection('inicio')} className="text-gray-700 hover:text-blue-600 py-2 text-left">
+                Início
+              </button>
+              <button onClick={() => scrollToSection('servicos')} className="text-gray-700 hover:text-blue-600 py-2 text-left">
+                Serviços
+              </button>
+              <button onClick={() => scrollToSection('portfolio')} className="text-gray-700 hover:text-blue-600 py-2 text-left">
+                Portfólio
+              </button>
+              <button onClick={() => scrollToSection('precos')} className="text-gray-700 hover:text-blue-600 py-2 text-left">
+                Preços
+              </button>
+              <button onClick={() => scrollToSection('contato')} className="text-gray-700 hover:text-blue-600 py-2 text-left">
+                Contato
+              </button>
             </nav>
-            <Button className="w-full mt-4 bg-green-600 hover:bg-green-700">
+            <Button onClick={() => scrollToSection('contato')} className="w-full mt-4 bg-green-600 hover:bg-green-700">
               Solicitar Orçamento
             </Button>
           </div>

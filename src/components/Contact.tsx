@@ -6,8 +6,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
+  const { toast } = useToast();
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
@@ -16,11 +18,63 @@ const Contact = () => {
     service: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Aqui você pode integrar com um serviço de envio de emails
+    setIsSubmitting(true);
+    
+    console.log('Dados do formulário:', formData);
+    
+    try {
+      // Criar o conteúdo do email
+      const emailBody = `
+        Nova solicitação de orçamento - SitesPaulínia
+        
+        Nome: ${formData.name}
+        E-mail: ${formData.email}
+        WhatsApp: ${formData.phone}
+        Tipo de Negócio: ${formData.business || 'Não informado'}
+        Serviço de Interesse: ${formData.service || 'Não informado'}
+        
+        Mensagem:
+        ${formData.message || 'Sem mensagem adicional'}
+        
+        ---
+        Enviado através do site SitesPaulínia
+      `;
+
+      // Abrir cliente de email padrão
+      const mailtoLink = `mailto:brunocamargocontato@hotmail.com?subject=Nova Solicitação de Orçamento - ${formData.name}&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoLink;
+
+      // Mostrar mensagem de sucesso
+      toast({
+        title: "Formulário enviado!",
+        description: "Seu cliente de email foi aberto. Confirme o envio para completar a solicitação.",
+        duration: 5000,
+      });
+
+      // Limpar formulário
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        business: '',
+        service: '',
+        message: ''
+      });
+      
+    } catch (error) {
+      console.error('Erro ao processar formulário:', error);
+      toast({
+        title: "Erro ao enviar",
+        description: "Houve um problema ao processar seu formulário. Tente novamente ou entre em contato diretamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -52,7 +106,9 @@ const Contact = () => {
                   <Phone className="w-6 h-6 text-blue-600 mr-3 mt-1" />
                   <div>
                     <h4 className="font-medium text-gray-900">Telefone</h4>
-                    <p className="text-gray-600">(19) 99999-9999</p>
+                    <a href="tel:+5519999999999" className="text-gray-600 hover:text-blue-600 transition-colors">
+                      (19) 99999-9999
+                    </a>
                     <p className="text-sm text-gray-500">WhatsApp disponível</p>
                   </div>
                 </div>
@@ -61,7 +117,9 @@ const Contact = () => {
                   <Mail className="w-6 h-6 text-blue-600 mr-3 mt-1" />
                   <div>
                     <h4 className="font-medium text-gray-900">E-mail</h4>
-                    <p className="text-gray-600">contato@sitespaulinia.com.br</p>
+                    <a href="mailto:brunocamargocontato@hotmail.com" className="text-gray-600 hover:text-blue-600 transition-colors">
+                      brunocamargocontato@hotmail.com
+                    </a>
                     <p className="text-sm text-gray-500">Respondemos em até 2h</p>
                   </div>
                 </div>
@@ -182,8 +240,13 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-green-600 hover:bg-green-700">
-                    Enviar Solicitação de Orçamento
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Enviando...' : 'Enviar Solicitação de Orçamento'}
                   </Button>
 
                   <p className="text-sm text-gray-500 text-center">

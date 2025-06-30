@@ -3,6 +3,13 @@ import React from 'react';
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -25,11 +32,31 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Nossos Serviços</h4>
             <ul className="space-y-2">
-              <li><a href="#servicos" className="text-gray-300 hover:text-white transition-colors">Sites para Consultórios</a></li>
-              <li><a href="#servicos" className="text-gray-300 hover:text-white transition-colors">Sites para Clínicas</a></li>
-              <li><a href="#servicos" className="text-gray-300 hover:text-white transition-colors">Sites para Comércios</a></li>
-              <li><a href="#servicos" className="text-gray-300 hover:text-white transition-colors">Design Responsivo</a></li>
-              <li><a href="#servicos" className="text-gray-300 hover:text-white transition-colors">SEO Local</a></li>
+              <li>
+                <button onClick={() => scrollToSection('servicos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Sites para Consultórios
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('servicos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Sites para Clínicas
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('servicos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Sites para Comércios
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('servicos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Design Responsivo
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('servicos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  SEO Local
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -37,11 +64,29 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Links Úteis</h4>
             <ul className="space-y-2">
-              <li><a href="#inicio" className="text-gray-300 hover:text-white transition-colors">Início</a></li>
-              <li><a href="#portfolio" className="text-gray-300 hover:text-white transition-colors">Portfólio</a></li>
-              <li><a href="#precos" className="text-gray-300 hover:text-white transition-colors">Preços</a></li>
-              <li><a href="#contato" className="text-gray-300 hover:text-white transition-colors">Contato</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+              <li>
+                <button onClick={() => scrollToSection('inicio')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Início
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('portfolio')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Portfólio
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('precos')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Preços
+                </button>
+              </li>
+              <li>
+                <button onClick={() => scrollToSection('contato')} className="text-gray-300 hover:text-white transition-colors text-left">
+                  Contato
+                </button>
+              </li>
+              <li>
+                <a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a>
+              </li>
             </ul>
           </div>
 
@@ -51,11 +96,15 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center">
                 <Phone className="w-4 h-4 mr-2" />
-                <span className="text-gray-300">(19) 99999-9999</span>
+                <a href="tel:+5519999999999" className="text-gray-300 hover:text-white transition-colors">
+                  (19) 99999-9999
+                </a>
               </div>
               <div className="flex items-center">
                 <Mail className="w-4 h-4 mr-2" />
-                <span className="text-gray-300">contato@sitespaulinia.com.br</span>
+                <a href="mailto:brunocamargocontato@hotmail.com" className="text-gray-300 hover:text-white transition-colors">
+                  brunocamargocontato@hotmail.com
+                </a>
               </div>
               <div className="flex items-center">
                 <MapPin className="w-4 h-4 mr-2" />
