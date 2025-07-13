@@ -9,7 +9,7 @@ const Portfolio = () => {
       title: "Kalifa Burger Shop",
       category: "Alimentação",
       description: "Site de hamburgueria com cardápio online e sistema de pedidos delivery.",
-      image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop",
       tags: ["Delivery", "Cardápio Online", "Pedidos"],
       url: "https://kalifa-burger-shop-online.vercel.app/"
     },
