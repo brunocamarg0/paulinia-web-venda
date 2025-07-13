@@ -6,6 +6,14 @@ import { ExternalLink } from 'lucide-react';
 const MoveisPlanejadosPortfolio = () => {
   const projects = [
     {
+      title: "Site Profissional - Móveis Planejados",
+      category: "Website",
+      description: "Site completo para empresa de móveis planejados com portfólio e sistema de orçamentos.",
+      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+      tags: ["Portfólio", "Orçamentos", "Responsivo"],
+      url: "https://moveis-insta-site-maker.vercel.app/"
+    },
+    {
       title: "Cozinha Moderna Americana",
       category: "Cozinha",
       description: "Cozinha planejada com ilha central e acabamento em laca branca.",
@@ -64,7 +72,11 @@ const MoveisPlanejadosPortfolio = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
-            <Card key={index} className="group overflow-hidden hover:shadow-xl transition-all duration-300 border-0">
+            <Card 
+              key={index} 
+              className={`group overflow-hidden hover:shadow-xl transition-all duration-300 border-0 ${project.url ? 'cursor-pointer' : ''}`}
+              onClick={() => project.url && window.open(project.url, '_blank')}
+            >
               <div className="relative overflow-hidden">
                 <img 
                   src={project.image} 
@@ -72,7 +84,9 @@ const MoveisPlanejadosPortfolio = () => {
                   className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
-                  <ExternalLink className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  {project.url && (
+                    <ExternalLink className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
                 </div>
               </div>
               
@@ -90,6 +104,15 @@ const MoveisPlanejadosPortfolio = () => {
                     </span>
                   ))}
                 </div>
+                
+                {project.url && (
+                  <div className="mt-4">
+                    <span className="text-sm text-amber-600 font-medium flex items-center gap-1">
+                      <ExternalLink className="w-4 h-4" />
+                      Ver site
+                    </span>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
